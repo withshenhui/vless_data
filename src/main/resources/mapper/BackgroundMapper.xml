@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vless.data.demand.mapper.BackgroundMapper">
+    <resultMap id="BaseResultMap" type="com.vless.data.demand.model.Background">
+        <id column="id" jdbcType="BIGINT" property="id" />
+    </resultMap>
+    <sql id="background_condition">
+        <if test="backgroundNo!='' and backgroundNo!=null">
+            and b.background_no = #{backgroundNo}
+        </if>
+        <if test="backgroundName!='' and backgroundName!=null">
+            and b.background_name like concat('%',#{backgroundName},'%')
+        </if>
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.vless.data.demand.query.BackgroundQuery">
+        select * from v_background b
+        where 1=1
+        <include refid="background_condition"/>
+        order by b.gmt_create desc
+
+    </select>
+
+    <select id="selectCount" resultType="Integer" parameterType="com.vless.data.demand.query.BackgroundQuery">
+        select count(1)  from v_background b
+        where 1=1
+        <include refid="background_condition"/>
+    </select>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vless.data.demand.mapper.DemandDetailMapper">
+    <resultMap id="BaseResultMap" type="com.vless.data.demand.result.DemandDetailResult">
+        <id column="id" jdbcType="BIGINT" property="id" />
+    </resultMap>
+
+    <resultMap id="ActionResultMap" type="com.vless.data.demand.result.DemandDetailActionResult">
+        <id column="id" jdbcType="BIGINT" property="id" />
+    </resultMap>
+
+    <select id="selectBackgroundByDemandId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select DISTINCT  b.id background_id,b.background_name label,d.id demand_id
+        from v_demand_detail dd INNER JOIN v_demand d ON dd.demand_id = d.id
+        INNER JOIN v_background b ON b.id=dd.background_id INNER JOIN v_action a ON a.id=dd.action_id
+        WHERE  dd.demand_id = #{demandId}
+        order by d.gmt_create desc
+    </select>
+
+    <select id="findActionByDemandIdAndBackgroundId" resultMap="ActionResultMap" parameterType="com.vless.data.demand.query.DemandDetailQuery">
+        select DISTINCT  a.id action_id,a.action_name label
+        from v_demand_detail dd INNER JOIN v_demand d ON dd.demand_id = d.id
+        INNER JOIN v_background b ON b.id=dd.background_id INNER JOIN v_action a ON a.id=dd.action_id
+        WHERE  dd.demand_id = #{demandId} AND b.id = #{backgroundId}
+        order by d.gmt_create desc
+
+    </select>
+
+</mapper>

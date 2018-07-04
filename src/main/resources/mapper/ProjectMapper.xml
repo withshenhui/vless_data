@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vless.data.demand.mapper.ProjectMapper">
+    <resultMap id="BaseResultMap" type="com.vless.data.demand.result.ProjectResult">
+        <id column="id" jdbcType="BIGINT" property="id" />
+    </resultMap>
+    <sql id="project_condition">
+        <if test="projectNo!='' and projectNo!=null">
+            and p.project_no = #{projectNo}
+        </if>
+
+        <if test="projectName!='' and projectName!=null">
+            and p.project_Name like concat('%',#{projectName},'%')
+        </if>
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.vless.data.demand.query.ProjectQuery">
+        select * from v_project p
+        where 1=1
+        <include refid="project_condition"/>
+        order by p.gmt_create desc
+
+    </select>
+
+    <select id="selectCount" resultType="Integer" parameterType="com.vless.data.demand.query.ProjectQuery">
+        select count(1)  from v_project p
+        where 1=1
+        <include refid="project_condition"/>
+    </select>
+
+</mapper>

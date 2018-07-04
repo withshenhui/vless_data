@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vless.data.demand.mapper.ActionMapper">
+    <resultMap id="BaseResultMap" type="com.vless.data.demand.result.ActionResult">
+        <id column="id" jdbcType="BIGINT" property="id" />
+    </resultMap>
+    <sql id="action_condition">
+        <if test="actionNo!='' and actionNo!=null">
+            and a.action_no = #{actionNo}
+        </if>
+        <if test="actionName!='' and actionName!=null">
+            and a.action_name like concat('%',#{actionName},'%')
+        </if>
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.vless.data.demand.query.ActionQuery">
+        select a.*,t.action_name action_type_name
+        from v_action a INNER JOIN v_action_type t ON t.id = a.action_type_id
+        where 1=1
+        <include refid="action_condition"/>
+        order by a.gmt_create desc
+
+    </select>
+
+    <select id="selectCount" resultType="Integer" parameterType="com.vless.data.demand.query.ActionQuery">
+        select count(1)  from v_action a
+        where 1=1
+        <include refid="action_condition"/>
+    </select>
+
+</mapper>
