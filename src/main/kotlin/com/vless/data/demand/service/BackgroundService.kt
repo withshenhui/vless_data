@@ -9,8 +9,10 @@ import com.vless.data.demand.repository.BackgroundRepository
 import com.vless.data.demand.result.PageResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class BackgroundService : BackgroundServiceAware {
 
 
@@ -35,5 +37,5 @@ class BackgroundService : BackgroundServiceAware {
 
     override fun findById(id: Long): Background = backgroundRepository.findById(id).get()
 
-    override fun findByBackgroundName(backgroundName: String): Background = backgroundRepository.findByBackgroundName(backgroundName)
+    override fun findByBackgroundName(backgroundName: String): Background? = backgroundRepository.findByBackgroundName(backgroundName)
 }

@@ -2,15 +2,12 @@ package com.vless.data.demand.controller
 
 import com.vless.data.common.BizException
 import com.vless.data.demand.model.Demand
-import com.vless.data.demand.query.DemandDetailQuery
 import com.vless.data.demand.query.DemandQuery
-import com.vless.data.demand.repository.DemandRepository
 import com.vless.data.demand.result.DemandDetailResult
 import com.vless.data.demand.result.PageResult
 import com.vless.data.demand.service.DemandDetailServiceAware
 import com.vless.data.demand.service.DemandServiceAware
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Controller
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid

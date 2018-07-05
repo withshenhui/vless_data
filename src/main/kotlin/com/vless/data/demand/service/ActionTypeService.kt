@@ -9,8 +9,10 @@ import com.vless.data.demand.repository.ActionTypeRepository
 import com.vless.data.demand.result.PageResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class ActionTypeService:ActionTypeServiceAware {
 
 

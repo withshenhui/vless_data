@@ -62,21 +62,4 @@ class Demand : BaseEntity() {
     @Column(name = "create_user_id")
     @NotEmpty
     var createUserId:Long? = null
-
-//
-//    val detailResult:List<DemandDetailResult>
-//    get() {
-//        return demandDetailService!!.findByDemandId(id)
-//    }
-//
-//    constructor()
-//
-//    @Autowired
-//    constructor(demandDetailService: DemandDetailServiceAware){
-//        Companion.demandDetailService=demandDetailService
-//    }
-//
-//    companion object {
-//        var demandDetailService: DemandDetailServiceAware? = null
-//    }
 }

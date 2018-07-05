@@ -23,7 +23,14 @@ class DemandDetailResult {
             demandDetailQuery.backgroundId=backgroundId
             return demandDetailService!!.findActionByDemandIdAndBackgroundId(demandDetailQuery)
         }
-
+    val children2:List<Long?>
+        get() {
+            var list:MutableList<Long?> = ArrayList()
+            for(a in children){
+                list.add(a.actionId)
+            }
+            return list
+        }
     constructor()
 
     @Autowired

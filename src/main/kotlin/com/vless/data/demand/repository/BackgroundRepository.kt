@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BackgroundRepository:CrudRepository<Background,Long> {
 
-    fun findByBackgroundName(backgroundName:String):Background
+    fun findByBackgroundName(backgroundName:String):Background?
 }

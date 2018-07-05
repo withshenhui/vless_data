@@ -9,8 +9,10 @@ import com.vless.data.demand.repository.ActionRepository
 import com.vless.data.demand.result.PageResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class ActionService : ActionServiceAware {
 
 
@@ -26,6 +28,7 @@ class ActionService : ActionServiceAware {
 
     override fun delete(id: Long) = actionRepository.deleteById(id)
 
+    @Transactional(readOnly = true)
     override fun findPage(actionQuery: ActionQuery): PageResult {
         PageHelper.startPage<Action>(actionQuery.page,actionQuery.limit)
         val list:List<Action> = actionMapper.selectAll(actionQuery)

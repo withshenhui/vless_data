@@ -7,6 +7,7 @@ import com.vless.data.demand.mapper.DemandMapper
 import com.vless.data.demand.model.Demand
 import com.vless.data.demand.query.DemandQuery
 import com.vless.data.demand.repository.DemandRepository
+import com.vless.data.demand.result.DemandResult
 import com.vless.data.demand.result.PageResult
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -33,9 +34,9 @@ class DemandService:DemandServiceAware {
     }
 
     override fun findPage(demand: DemandQuery): PageResult {
-        PageHelper.startPage<Demand>(demand.page,demand.limit)
-        val demandList:List<Demand>? = demandMapper.selectAll(demand)
-        val pageInfo:PageInfo<Demand> = PageInfo(demandList)
+        PageHelper.startPage<DemandResult>(demand.page,demand.limit)
+        val demandList:List<DemandResult>? = demandMapper.selectAll(demand)
+        val pageInfo:PageInfo<DemandResult> = PageInfo(demandList)
         return PageResult(pageInfo.total,demandList)
 
     }
